@@ -1,0 +1,5 @@
+.env
+.learning-progress.json
+.python-learning-progress.json
+__pycache__/
+.venv/
