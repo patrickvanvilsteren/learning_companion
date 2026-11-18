@@ -90,12 +90,12 @@ def create_agents(ai_guide: str, python_guide: str) -> TutorPair:
     @tool
     async def consult_python_tutor(question: str) -> str:
         """Ask the Python tutor about Python syntax or programming basics."""
-        return await consult_peer(question, python_agent, python_session, "Python")
+        return await consult_peer(question, python_agent, python_session, "Python", budget)
 
     @tool
     async def consult_ai_tutor(question: str) -> str:
         """Ask the AI tutor about Microsoft Agent Framework concepts."""
-        return await consult_peer(question, ai_agent, ai_session, "AI")
+        return await consult_peer(question, ai_agent, ai_session, "AI", budget)
 
     ai_agent = Agent(
         client=FoundryChatClient(
@@ -134,9 +134,15 @@ library behavior. If the guide does not settle a detail, say so and direct the l
 to the relevant official Python documentation. The official Python Tutorial assumes
 basic programming knowledge; do not assume the learner already has it.
 Offer small exercises and give specific, kind feedback. Clearly label teaching
-examples as examples. You may consult the AI tutor for a Microsoft Agent Framework
-connection, then explain the Python parts in simple terms. When answering a
-consultation from the AI tutor, do not ask the AI tutor to consult you again.
+examples as examples. Do not complete an exercise for the learner unless they
+explicitly request the solution; otherwise provide a hint or ask them to share their
+attempt. Ask a clarifying question when the learner's request or environment is
+unclear. Periodically give a short quiz or prediction question and wait for the
+learner's answer before revealing the answer. Cover Python concepts, commands,
+built-in functions, and standard-library topics at an appropriate pace. You may
+consult the AI tutor for a Microsoft Agent Framework connection, then explain the
+Python parts in simple terms. When answering a consultation from the AI tutor, do
+not ask the AI tutor to consult you again.
 
 Python learning guide:
 {python_guide}""",

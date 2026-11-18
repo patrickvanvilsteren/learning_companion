@@ -53,3 +53,22 @@ If PowerShell blocks virtual-environment activation, run the environment's Pytho
 AI and Python progress are stored separately in `.learning-progress.json` and `.python-learning-progress.json`. Conversation sessions last until you exit; marked progress remains for your next run.
 
 The official Python Tutorial notes that it is intended for people who already know basic programming. The Python tutor is instructed to explain from first principles, but you can still ask it to slow down or define a term. For framework concepts and provider-specific details, follow the official links in the learning guides and the [Microsoft Agent Framework documentation](https://learn.microsoft.com/en-us/agent-framework/).
+
+## Use the Python tutor in GitHub Copilot CLI
+
+This repository also includes a Copilot CLI custom agent at
+`.github/agents/python-learning-tutor.agent.md`. It uses the Copilot CLI
+session's selected model, so it can use any available built-in Copilot model
+without requiring the Microsoft Foundry configuration used by `tutor.py`.
+
+Restart Copilot CLI after adding or changing the profile, then select it with
+`/agent` or start a session with:
+
+```powershell
+copilot --agent python-learning-tutor
+```
+
+Choose the model separately in Copilot CLI with `/model` (or `--model` when
+starting Copilot). The profile deliberately has no editing tool: it can inspect
+files and run safe checks, but it should not complete exercises or modify the
+learner's code.
